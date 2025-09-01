@@ -9,6 +9,6 @@ terraform {
 }
 
 module "ecr" {
-  source    = "../../../infrastructure-modules/ecr"
+  source    = "../../../modules/ecr"
   repo_name = "flask-app"
 }
