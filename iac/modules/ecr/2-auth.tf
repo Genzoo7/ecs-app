@@ -1,4 +1,4 @@
-# IAM Role for GitHub Actions to access ECR (OIDC)
+# IAM Role for GitHub Actions to access ECR via OIDC for disared repo and branch
 resource "aws_iam_role" "github_actions_role" {
   name               = "github-actions-ecr-role"
   assume_role_policy = jsonencode({
@@ -13,7 +13,7 @@ resource "aws_iam_role" "github_actions_role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:your-github-username/your-repo-name:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = "repo:Genzoo7/ecs-app:ref:refs/heads/main"
           }
         }
       }
@@ -36,7 +36,10 @@ resource "aws_iam_policy" "ecr_push_policy" {
         "ecr:PutImage",
         "ecr:InitiateLayerUpload",
         "ecr:UploadLayerPart",
-        "ecr:CompleteLayerUpload"
+        "ecr:CompleteLayerUpload",
+        "ecr:DescribeRepositories",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
       ],
       Resource = "*"
     }]
