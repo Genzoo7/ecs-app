@@ -5,11 +5,11 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # 3. Kopiujemy plik requirements.txt i instalujemy zależności
-COPY requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. Kopiujemy plik aplikacji do kontenera
-COPY app.py /app/app.py
+COPY ./app.py /app/app.py
 
 # 5. Eksponujemy port, na którym działa aplikacja
 EXPOSE 8080
