@@ -5,6 +5,7 @@
 **/*.tfstate
 **/*.tfstate.backup
 **/*.terraform.lock.hcl
+**/*.terraform.tfstate.lock.info
 
 # Terraform variables files (mogą zawierać secrets)
 **/*.tfvars
@@ -22,3 +23,4 @@ override.tf.json
 # CLI configuration files
 .terraformrc
 terraform.rc
+
