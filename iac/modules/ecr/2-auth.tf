@@ -21,33 +21,39 @@ resource "aws_iam_role" "github_actions_role" {
   })
 }
 
-# Policy to allow pushing to ECR
-resource "aws_iam_policy" "ecr_push_policy" {
-  name        = "ecr-push-policy"
-  description = "Allow push to ECR"
+# # Policy to allow pushing to ECR
+# resource "aws_iam_policy" "ecr_push_policy" {
+#   name        = "ecr-push-policy"
+#   description = "Allow push to ECR"
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect   = "Allow",
-      Action   = [
-        "ecr:GetAuthorizationToken",
-        "ecr:BatchCheckLayerAvailability",
-        "ecr:PutImage",
-        "ecr:InitiateLayerUpload",
-        "ecr:UploadLayerPart",
-        "ecr:CompleteLayerUpload",
-        "ecr:DescribeRepositories",
-        "ecr:GetDownloadUrlForLayer",
-        "ecr:BatchGetImage"
-      ],
-      Resource = "*"
-    }]
-  })
-}
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [{
+#       Effect   = "Allow",
+#       Action   = [
+#         "ecr:GetAuthorizationToken",
+#         "ecr:BatchCheckLayerAvailability",
+#         "ecr:PutImage",
+#         "ecr:InitiateLayerUpload",
+#         "ecr:UploadLayerPart",
+#         "ecr:CompleteLayerUpload",
+#         "ecr:DescribeRepositories",
+#         "ecr:GetDownloadUrlForLayer",
+#         "ecr:BatchGetImage"
+#       ],
+#       Resource = "*"
+#     }]
+#   })
+# }
 
-# Attach the policy to the role
-resource "aws_iam_role_policy_attachment" "attach_ecr" {
+# # Attach the policy to the role
+# resource "aws_iam_role_policy_attachment" "attach_ecr" {
+#   role       = aws_iam_role.github_actions_role.name
+#   policy_arn = aws_iam_policy.ecr_push_policy.arn
+# }
+
+# Attach AWS AdministratorAccess managed policy
+resource "aws_iam_role_policy_attachment" "attach_admin" {
   role       = aws_iam_role.github_actions_role.name
-  policy_arn = aws_iam_policy.ecr_push_policy.arn
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
