@@ -12,7 +12,7 @@ variable "vpc_cicr_block" {
 variable "availability_zones" {
     description = "A list of availability zones to use"
     type        = list(string)
-    default     = ["us-east-1a", "us-east-1b"]
+    default     = ["us-west-1a", "us-west-1b"]
 }
 
 variable "private_subnets" {
@@ -33,4 +33,15 @@ variable "private_subnet_tags" {
 variable "public_subnet_tags" {
     description = "A map of tags to add to public subnets"
     type        = map(string)
+}
+
+variable "container_image" {
+  description = "The container image to deploy in ECS"
+  type        = string
+}
+
+variable "region" {
+  description = "The AWS region to deploy resources in"
+  type        = string
+  default     = "us-west-1"
 }

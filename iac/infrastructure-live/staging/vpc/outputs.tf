@@ -10,3 +10,6 @@ output "public_subnet_ids" {
   value = module.vpc.public_subnet_ids
 }
 
+output "alb_dns_name" {
+  value = module.vpc.alb_dns_name
+}
